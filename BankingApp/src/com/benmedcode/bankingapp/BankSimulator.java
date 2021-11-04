@@ -33,6 +33,7 @@ public class BankSimulator {
            if(cust.getUsername() == username && cust.getPIN() != PIN)
            {
                System.out.println("Incorrect Password");
+               System.out.println();
            }
            else if(cust.getUsername().equals(username)  && cust.getPIN() == PIN)
            {
