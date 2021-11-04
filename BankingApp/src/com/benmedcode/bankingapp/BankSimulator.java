@@ -30,14 +30,14 @@ public class BankSimulator {
     {
        for(Customer cust : customers)
        {
-           if(cust.getUsername() == username)
+           if(cust.getUsername() == username && cust.getPIN() != PIN)
            {
                System.out.println("Incorrect Password");
            }
            else if(cust.getUsername().equals(username)  && cust.getPIN() == PIN)
            {
-               System.out.println("Successfully Logged In");
-               System.out.println("\n Welcome " + cust.getUsername());
+
+               System.out.println("\n\nSuccessfully Logged In");
                setCurrentCustomerIndex(customers.indexOf(cust)); //set the current customer to the logged in
                return true;
            }
@@ -80,13 +80,10 @@ public class BankSimulator {
                 customerAccountMenu();
             }
 
-
-
         }
         else if(menuItem == 2)
         {
-            System.out.println("Thanks for selecting BMC as your banking provider.");
-            System.out.println("Lets start by entering your name. ");
+            System.out.println("Welcome to BMC");
             System.out.println("First name: ");
             String firstName = sc.nextLine();
             System.out.println("Last Name: ");
@@ -138,11 +135,13 @@ public class BankSimulator {
     public void customerAccountMenu()
     {
         System.out.println("Account Menu()\n 1. Deposit \n 2. Withdraw \n 3. Close Your Account");
+        System.out.print("Select: ");
         int menuOption = sc.nextInt();
         sc.nextLine();
 
         //If the menuOption entered does not match, prompt again.
-        while(menuOption !=1   && menuOption !=2 && menuOption !=3 ) {
+        while(menuOption !=1   && menuOption !=2 && menuOption !=3 )
+        {
             System.out.println("Please select from out menu. ");
             menuOption = sc.nextInt();
             sc.nextLine();
@@ -150,30 +149,54 @@ public class BankSimulator {
 
         if(menuOption == 1)
         {
-            System.out.println("You chose Deposit.");
-            System.out.println("How much would you like to deposit? ");
+            System.out.println("Which account would you like to deposit your funds?");
+            System.out.println("(1) Checkings or (2) Savings");
+            int option = sc.nextInt();
+            sc.nextLine();
+
             System.out.print("Amount: ");
+
             double amount = sc.nextDouble();
             sc.nextLine();
-            customers.get(getCurrentCustomerIndex()).makeDeposit(amount);
+
+                if(option == 1)
+                {
+                    customers.get(getCurrentCustomerIndex()).makeCheckingsDeposit(amount);
+                }
+                else if(option == 2){
+                    customers.get(getCurrentCustomerIndex()).makeSavingsDeposit(amount);
+                }
+                else{
+                    System.out.println("We are sorry please try again. ");
+                }
         }
         else if(menuOption == 2)
         {
-            System.out.println("You chose Withdraw.");
-            System.out.println("How much would you like to withdraw? ");
+            System.out.println("Which account will you be withdrawing from?");
+            System.out.println("(1) Checkings or (2) Savings");
+            int option = sc.nextInt();
+            sc.nextLine();
+
             System.out.print("Amount: ");
             double amount = sc.nextDouble();
             sc.nextLine();
-            customers.get(getCurrentCustomerIndex()).makeWithdrawal(amount);
+
+            if(option == 1)
+            {
+                customers.get(getCurrentCustomerIndex()).makeCheckingsWithdrawal(amount);
+            }
+            else if(option == 2){
+                customers.get(getCurrentCustomerIndex()).makeSavingsWithdrawal(amount);
+            }
+            else{
+                System.out.println("We are sorry please try again. ");
+            }
 
         }
-        else{
+        else {
+
             System.out.println("Closing Account.....");
+            System.out.println("Successfully Closed");
         }
-
-        System.out.println("Successfully Closed");
-
-
-
     }
 }

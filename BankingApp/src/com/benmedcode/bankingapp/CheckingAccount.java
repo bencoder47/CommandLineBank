@@ -5,7 +5,6 @@ public class CheckingAccount implements Account{
 
     private final String ACCOUNT_TYPE = "CHECKING";
     private double balance = 0.0;
-    private int accountNumber;
 
     public CheckingAccount() {
         System.out.println("Creating a new checking account");
@@ -40,6 +39,6 @@ public class CheckingAccount implements Account{
 
     @Override
     public String toString(){
-        return "Account: " + ACCOUNT_TYPE + " \n Balance: " + balance + " \n";
+        return " Account: " + ACCOUNT_TYPE + " \n Balance: " + balance + " \n";
     }
 }

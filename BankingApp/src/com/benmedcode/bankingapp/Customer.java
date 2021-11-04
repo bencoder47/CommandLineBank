@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class Customer {
 
     private ArrayList<Account> Accounts = new ArrayList<>();
-
+    private Account Checkings = new CheckingAccount();
+    private Account Savings = new SavingsAccount();
     private int ID;
     private String firstName;
     private String lastName;
@@ -21,12 +22,21 @@ public class Customer {
         this.PIN = PIN;
     }
 
-    public void makeDeposit(double amountToDeposit) {
-        this.Accounts.get(getAccountIndex()).deposit(amountToDeposit);
+    public void makeCheckingsDeposit(double amountToDeposit) {
+        this.Checkings.deposit(amountToDeposit);
     }
 
-    public void makeWithdrawal(double amountToWithdraw) {
-        this.Accounts.get(getAccountIndex()).withdraw(amountToWithdraw);
+    public void makeCheckingsWithdrawal(double amountToWithdraw) {
+        this.Checkings.withdraw(amountToWithdraw);
+    }
+
+
+    public void makeSavingsDeposit(double amountToDeposit) {
+        this.Savings.deposit(amountToDeposit);
+    }
+
+    public void makeSavingsWithdrawal(double amountToWithdraw) {
+        this.Savings.withdraw(amountToWithdraw);
     }
 
     public void CloseAccount() {
@@ -44,7 +54,7 @@ public class Customer {
 
 
     public String getAccounts() {
-        return this.Accounts.toString();
+        return this.Checkings.toString() + " \n" + this.Savings.toString();
     }
 
     public void setAccounts(ArrayList<Account> accounts) {
@@ -102,8 +112,7 @@ public class Customer {
     @Override
     public String toString()
     {
-        return "name: "  + this.firstName + " " + this.lastName + "\n user: " + this.username + "\n Accounts: \n" + this.getAccounts();
+        return " name: "  + this.firstName + " " + this.lastName + "\n user: " + this.username + "\n Accounts \n -------- \n" + this.getAccounts();
     }
-
 
 }
